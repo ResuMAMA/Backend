@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const db="mongodb+srv://Rishika:resuMAMA@cluster0.2pxmk.mongodb.net/resuMAMA?retryWrites=true&w=majority"
+const bodyparser=require('body-parser');
+const CREDS=require('./creds');
+const db=CREDS.DB;
 mongoose.connect(db,{
   useNewUrlParser:true,
   useUnifiedTopology:true,
@@ -10,7 +12,8 @@ mongoose.connect(db,{
 }).then(()=>{console.log("db connected")}).catch((err)=>{
   console.log(err);}
   )
-
+app.use(bodyparser());
+  app.use(express.json());
 // auth routes
 const authRoute=require('./routes/auth');
 app.use('/auth',authRoute);
