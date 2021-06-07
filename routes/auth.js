@@ -39,8 +39,24 @@ router.post('/register', async (req,res)=>{
 
 })
 
-router.post('/login',(req,res)=>{
-    res.send('login');
+router.post('/login', async (req,res)=>{
+
+   const email=req.body.email
+   const plainPassword=req.body.password
+   const loginUser=await User.findOne({email:email});
+   if(!loginUser)
+   res.status(400).json({message:"INVALID CREDENTIALS"});
+   const isMatch= await bcrypt.compare(plainPassword,loginUser.password);
+
+   const mytoken= await loginUser.generateToken();
+
+   if(isMatch){
+       res.status(200).json({message:"LOGIN SUCCESS",data:{token:mytoken,id:loginUser._id}});
+     }
+   else
+   res.status(400).json({message:"INVALID CREDENTIALS"});
+   
+
 })
 
 module.exports=router
