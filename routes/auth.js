@@ -44,8 +44,9 @@ router.post('/login', async (req,res)=>{
    const email=req.body.email
    const plainPassword=req.body.password
    const loginUser=await User.findOne({email:email});
-   if(!loginUser)
+   if(!loginUser){
    res.status(400).json({message:"INVALID CREDENTIALS"});
+   }
    const isMatch= await bcrypt.compare(plainPassword,loginUser.password);
 
    const mytoken= await loginUser.generateToken();
@@ -53,8 +54,9 @@ router.post('/login', async (req,res)=>{
    if(isMatch){
        res.status(200).json({message:"LOGIN SUCCESS",data:{token:mytoken,id:loginUser._id}});
      }
-   else
+   else{
    res.status(400).json({message:"INVALID CREDENTIALS"});
+   }
    
 
 })

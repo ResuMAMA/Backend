@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const bodyparser=require('body-parser');
 const CREDS=require('./creds');
 const db=CREDS.DB;
+
+
 mongoose.connect(db,{
   useNewUrlParser:true,
   useUnifiedTopology:true,
@@ -17,6 +19,10 @@ app.use(bodyparser());
 // auth routes
 const authRoute=require('./routes/auth');
 app.use('/auth',authRoute);
+
+//portfolio routes
+const portfolioRoute=require('./routes/createPortfolio');
+app.use('/portfolios',portfolioRoute);
 
 const PORT =process.env.PORT||8080;
 app.get('/', (req, res) => {

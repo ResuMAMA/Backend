@@ -36,6 +36,12 @@ UserSchema.methods.generateToken=async function(){
     }
 
 }
+/**
+ * 
+ * 
+ * 
+ * 
+ */
 
 
 module.exports=mongoose.model("User",UserSchema);
