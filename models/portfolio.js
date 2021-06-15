@@ -8,6 +8,10 @@ const portfolioSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
+    email:{
+        type:String,
+        required:true
+    },
     social_links:{
         linkedIn:String,
         github:String,
@@ -31,4 +35,4 @@ const portfolioSchema=new mongoose.Schema({
 })
 
 
-module.exports=mongoose.model(portfolioSchema,"Portfolio");
+module.exports=mongoose.model("Portfolio",portfolioSchema);
