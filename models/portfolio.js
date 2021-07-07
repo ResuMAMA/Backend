@@ -12,6 +12,12 @@ const portfolioSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    mobile:{
+        type:String
+    },
+    profileImage_url:{
+        type:String
+    }
     social_links:{
         linkedIn:String,
         github:String,
