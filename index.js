@@ -3,8 +3,9 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyparser=require('body-parser');
 const CREDS=require('./creds');
+const cors=require('cors')
 const db=CREDS.DB;
-
+app.use(cors());
 
 mongoose.connect(db,{
   useNewUrlParser:true,
@@ -24,7 +25,7 @@ app.use('/auth',authRoute);
 const portfolioRoute=require('./routes/createPortfolio');
 app.use('/portfolios',portfolioRoute);
 
-const PORT =process.env.PORT||8080;
+const PORT =process.env.PORT||5000;
 app.get('/', (req, res) => {
   res.send('Hello World');
 });

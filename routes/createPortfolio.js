@@ -6,12 +6,12 @@ const tokenVerifier=require('../middleware')
 router.post('/create_new',tokenVerifier,async (req,res)=>{
    
     try{
-        
+        console.log(req.body)
     const new_portfolio=await new Portfolio(req.body);
     const created=await new_portfolio.save();
-    res.status(200).json(created);
+    res.status(200).json({message:"created portfolio"});
     }catch(error){
-      res.status(400).json({error:"could not build portfolio"})
+      res.status(201).json({error:"could not build portfolio"})
     }
 })
 router.get('/myportfolios',tokenVerifier,async(req,res)=>{

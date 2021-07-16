@@ -17,7 +17,7 @@ const portfolioSchema=new mongoose.Schema({
     },
     profileImage_url:{
         type:String
-    }
+    },
     social_links:{
         linkedIn:String,
         github:String,
