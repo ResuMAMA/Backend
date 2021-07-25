@@ -25,7 +25,8 @@ router.get('/myportfolios',tokenVerifier,async(req,res)=>{
     }
 })
 router.get('/portfolio.me',async (req,res)=>{
-    const {id}=req.body;
+    const id=req.headers.portfolio_id;
+  // console.log(id)
     try{
       const portFolioData=await Portfolio.find({_id:id});
       res.status(200).json(portFolioData)
