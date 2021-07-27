@@ -15,8 +15,8 @@ router.post('/create_new',tokenVerifier,async (req,res)=>{
     }
 })
 router.get('/myportfolios',tokenVerifier,async(req,res)=>{
-    const {user_id}=req.body;
-    console.log(user_id)
+    const user_id=req.headers.user_id;
+   // console.log(user_id)
     try{
        const portFolios=await Portfolio.find({user_id:user_id});
        res.status(200).json(portFolios);

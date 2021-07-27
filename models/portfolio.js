@@ -36,6 +36,13 @@ const portfolioSchema=new mongoose.Schema({
         title:String,
         description:String
     }]
+    ,
+    template_no:{
+        type:String,
+        required=true
+    },
+    
+
 
 
 })
