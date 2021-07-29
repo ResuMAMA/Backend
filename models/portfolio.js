@@ -39,7 +39,7 @@ const portfolioSchema=new mongoose.Schema({
     ,
     template_no:{
         type:String,
-        required=true
+        required:true
     },
     
 
