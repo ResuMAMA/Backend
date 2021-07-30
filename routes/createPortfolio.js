@@ -6,7 +6,7 @@ const tokenVerifier=require('../middleware')
 router.post('/create_new',tokenVerifier,async (req,res)=>{
    
     try{
-        console.log(req.body)
+       // console.log(req.body)
     const new_portfolio=await new Portfolio(req.body);
     const created=await new_portfolio.save();
     res.status(200).json({message:"created portfolio"});
