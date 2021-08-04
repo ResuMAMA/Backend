@@ -61,4 +61,21 @@ router.post('/login', async (req,res)=>{
 
 })
 
+router.post('/changePassword',async (req,res)=>{
+    const {userId,oldPassword,newPassword}=req.body;
+   
+    try{
+    const hashpassword=await bcrypt.hash(newPassword,10);
+    //console.log(hashpassword)
+    const result=await User.updateOne({_id:userId},{
+        $set : {
+            password:hashpassword
+        }
+    })
+       res.status(200).json({message:"ssuccess"})
+    }catch(err){
+         res.status(400).json({message:"failed"});
+    }
+})
+
 module.exports=router
