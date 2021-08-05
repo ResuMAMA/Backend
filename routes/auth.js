@@ -3,6 +3,8 @@ const router=express.Router();
 const User=require('../models/user')
 const bcrypt=require('bcrypt')
 
+///-----------register
+
 router.post('/register', async (req,res)=>{
     
     const uu=req.body.username
@@ -39,6 +41,7 @@ router.post('/register', async (req,res)=>{
 
 })
 
+///--------------login 
 router.post('/login', async (req,res)=>{
 
    const email=req.body.email
@@ -61,10 +64,22 @@ router.post('/login', async (req,res)=>{
 
 })
 
+//---------change password
 router.post('/changePassword',async (req,res)=>{
     const {userId,oldPassword,newPassword}=req.body;
    
     try{
+        const requestUser=await User.findOne({_id:userId});
+        if(!requestUser){
+          //  console.log("no user found")
+    return res.status(400).json({message:"Invalid credentials"});}
+        //console.log(requestUser.password)
+        const isMatch=await bcrypt.compare(oldPassword,requestUser.password);
+        if(!isMatch){
+            //console.log("old pass no match")
+         return res.status(400).json({message:"Invalid credentials"})
+        }
+
     const hashpassword=await bcrypt.hash(newPassword,10);
     //console.log(hashpassword)
     const result=await User.updateOne({_id:userId},{
@@ -72,10 +87,37 @@ router.post('/changePassword',async (req,res)=>{
             password:hashpassword
         }
     })
-       res.status(200).json({message:"ssuccess"})
+       res.status(200).json({message:"success"})
     }catch(err){
+        //console.log(err)
          res.status(400).json({message:"failed"});
     }
 })
 
+//--------------------------forgot password
+
+router.post('/forgotPassword',async(req,res)=>{
+    const {email,newPassword}=req.body;
+    try{
+           const requestUser=await User.findOne({email:email});
+           if(requestUser==null){
+               return res.status(401).json({message:"Invalid email"})
+           }
+           const hashpassword=await bcrypt.hash(newPassword,10);
+           const result = await User.findOneAndUpdate({_id:requestUser._id},{
+               $set:{
+                   password:hashpassword
+               }
+           })
+
+           res.status(200).json({message:"success"});
+
+    }catch(err){
+        res.status(400).json({message:"failed"});
+    }
+})
+
+
 module.exports=router
+
+
