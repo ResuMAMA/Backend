@@ -67,17 +67,17 @@ router.post('/login', async (req,res)=>{
 //---------change password
 router.post('/changePassword',async (req,res)=>{
     const {userId,oldPassword,newPassword}=req.body;
-   
+   // console.log(userId+" "+oldPassword+" "+newPassword)
     try{
         const requestUser=await User.findOne({_id:userId});
         if(!requestUser){
           //  console.log("no user found")
-    return res.status(400).json({message:"Invalid credentials"});}
+            return res.status(400).json({message:"Invalid credentials,no user"});}
         //console.log(requestUser.password)
         const isMatch=await bcrypt.compare(oldPassword,requestUser.password);
         if(!isMatch){
             //console.log("old pass no match")
-         return res.status(400).json({message:"Invalid credentials"})
+         return res.status(400).json({message:"Invalid credentials,no match"})
         }
 
     const hashpassword=await bcrypt.hash(newPassword,10);
