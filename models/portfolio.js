@@ -41,6 +41,10 @@ const portfolioSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    resumeLink:{
+        type:String,
+        required:true
+    }
     
 
 
