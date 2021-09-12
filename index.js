@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const bodyparser=require('body-parser');
 const CREDS=require('./creds');
 const cors=require('cors')
-const db=CREDS.DB;
+require("dotenv").config();
+const db="mongodb+srv://Rishika:resuMAMA@cluster0.2pxmk.mongodb.net/resuMAMA?retryWrites=true&w=majority";
 app.use(cors());
 
 mongoose.connect(db,{

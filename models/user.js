@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 const jwt=require('jsonwebtoken')
-const CREDS =require('../creds')
+const CREDS ={jwtSecrete:"resuMAMA_the_portfolio_app"};
 const UserSchema=new mongoose.Schema({
     username:{
         type:String,
