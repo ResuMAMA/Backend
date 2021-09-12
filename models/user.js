@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 const jwt=require('jsonwebtoken')
-const CREDS ={jwtSecrete:"resuMAMA_the_portfolio_app"};
+const CREDS =process.env.jwtSecrete;
 const UserSchema=new mongoose.Schema({
     username:{
         type:String,
@@ -26,7 +26,7 @@ const UserSchema=new mongoose.Schema({
 
 UserSchema.methods.generateToken=async function(){
     try{
-    const token=await jwt.sign({_id:this._id.toString()},CREDS.jwtSecrete);
+    const token=await jwt.sign({_id:this._id.toString()},CREDS);
    // console.log(token);
     this.tokens=this.tokens.concat({token:token})
     await this.save();

@@ -1,5 +1,5 @@
 const jwt=require('jsonwebtoken')
-const CREDS={jwtSecrete:"resuMAMA_the_portfolio_app"};
+const CREDS=process.env.jwtSecrete;
 const createError =require('http-errors')
 module.exports=(req,res,next)=>{
     console.log(req.headers)
@@ -10,7 +10,7 @@ module.exports=(req,res,next)=>{
     const header=req.headers.authorization;
     const bearerToken=header.split(' ');
     const token=bearerToken[1];
-    jwt.verify(token,CREDS.jwtSecrete,(err,payload)=>{
+    jwt.verify(token,CREDS,(err,payload)=>{
         if(err){
         return next(createError.Unauthorized())
         }
