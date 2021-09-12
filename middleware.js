@@ -1,5 +1,5 @@
 const jwt=require('jsonwebtoken')
-const CREDS=require('./creds')
+const CREDS={jwtSecrete:"resuMAMA_the_portfolio_app"};
 const createError =require('http-errors')
 module.exports=(req,res,next)=>{
     console.log(req.headers)
