@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyparser=require('body-parser');
-const CREDS=require('./creds');
+//const CREDS=require('./creds');
 const cors=require('cors')
 require("dotenv").config();
 const db="mongodb+srv://Rishika:resuMAMA@cluster0.2pxmk.mongodb.net/resuMAMA?retryWrites=true&w=majority";
